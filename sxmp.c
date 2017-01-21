@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <xmp.h>
-
-#include <pulse/simple.h>
-#include <pulse/error.h>
-
-#define BUFSIZE 1024
+#include <string.h>
+#include <ao/ao.h>
+#define BUF_SIZE 4096
 
 void version(void){
   printf("libxmp version: %s\n", xmp_version);
@@ -17,16 +15,29 @@ int main(int argc, char **argv) {
     printf("usage, %s <filename>\n", argv[0]);
     exit(EXIT_FAILURE);
   }
-  int error;
+
+  ao_device *device;
+  ao_sample_format format;
+  int default_driver;
+  char *buffer;
+  int buf_size;
+  int sample;
+  float freq = 440.0;
+  int i;
+  ao_initialize();
+
+  default_driver = ao_default_driver_id();
+
+  memset(&format, 0, sizeof(format));
+  format.bits = 16;
+  format.channels = 2;
+  format.rate = 44100;
+  format.byte_format = AO_FMT_LITTLE;
+
+  device = ao_open_live(default_driver, &format, NULL );
+
   xmp_context context = xmp_create_context();
   struct xmp_frame_info frame_info;
-  static const pa_sample_spec simple_spec = {
-      .format = PA_SAMPLE_S16LE,
-      .rate = 44100,
-      .channels = 2
-  };
-  pa_simple *stream = NULL;
-  stream = pa_simple_new(NULL, argv[0], PA_STREAM_PLAYBACK, NULL, "playback", &simple_spec, NULL, NULL, &error);
 
   if (xmp_load_module(context, argv[1]) != 0){
     fprintf(stderr, "can't find %s\n", argv[1]);
@@ -44,13 +55,14 @@ int main(int argc, char **argv) {
     xmp_get_frame_info(context, &frame_info);
     if (frame_info.loop_count > 0)
       break;
-    pa_simple_write(stream, frame_info.buffer, frame_info.buffer_size, &error);
+    ao_play(device, frame_info.buffer, frame_info.buffer_size);
   }
 
-  pa_simple_drain(stream, &error);
   xmp_end_player(context);
   xmp_release_module(context);
   xmp_free_context(context);
+  ao_close(device);
+  ao_shutdown();
 
   return 0;
 }
