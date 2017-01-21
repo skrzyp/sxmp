@@ -5,8 +5,12 @@
 #include <ao/ao.h>
 #define BUF_SIZE 4096
 
+#define SXMP_VERSION "0.0.1"
+
 void version(void){
-  printf("libxmp version: %s\n", xmp_version);
+  const char* sxmp_version = SXMP_VERSION;
+  printf("libxmp version:\t%s\n", xmp_version);
+  printf("sxmp version:\t%s\n", sxmp_version);
 }
 
 int main(int argc, char **argv) {
