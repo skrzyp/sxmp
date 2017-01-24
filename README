@@ -3,3 +3,8 @@
 |-  |- -| | | | | | simple XMP module player
 |___|_,_|_|_|_|  _| (C) 2017 Jakub Skrzypnik
               |_|
+
+ChangeLog:
+
+0.0.2: Audio and module loading done separately, initial abstraction layers
+0.0.1: Initial version, allowed simple file loading
