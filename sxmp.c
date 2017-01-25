@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "xmp_wrapper.c"
-#include "audio.c"
+#include "player/xmp.h"
+#include "audio/libao.h"
 
 #define SXMP_VERSION "0.0.2"
 
@@ -12,7 +12,7 @@ void version(void){
 
 int main(int argc, char **argv) {
   version();
-  if (argv[1] == 0) {
+  if (argc <= 1) {
     printf("usage, %s <filename>\n", argv[0]);
     exit(EXIT_FAILURE);
   }
