@@ -4,6 +4,8 @@
 |___|_,_|_|_|_|  _| (C) 2017 Jakub Skrzypnik
               |_|
 
+dependencies: libxmp, libao
+
 ChangeLog:
 
 0.0.2: Audio and module loading done separately, initial abstraction layers
