@@ -1,16 +1,19 @@
 all: sxmp
 
-sxmp: sxmp.o audio/libao.o player/xmp.o
-	gcc -o sxmp sxmp.o libao.o xmp.o -lxmp -lao
+sxmp: sxmp.o libao.o xmp.o ncurses.o
+	gcc -o sxmp sxmp.o libao.o xmp.o ncurses.o -lxmp -lao -lncurses
 
 sxmp.o:
 	gcc -c sxmp.c
 
-audio/libao.o:
+libao.o:
 	gcc -c audio/libao.c
 
-player/xmp.o:
+xmp.o:
 	gcc -c player/xmp.c
+
+ncurses.o:
+	gcc -c ui/ncurses.c
 
 clean:
 	rm *.o

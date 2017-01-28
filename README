@@ -1,6 +1,6 @@
  ___ _ _ _____ ___
 |  _| ' | . . | . |
-|-  |- -| | | | | | simple XMP module player
+|-  |- -| | | | | | simple extensible module player
 |___|_,_|_|_|_|  _| (C) 2017 Jakub Skrzypnik
               |_|
 
@@ -8,5 +8,6 @@ dependencies: libxmp, libao
 
 ChangeLog:
 
+0.0.3: First UI: ncurses, still very limited
 0.0.2: Audio and module loading done separately, initial abstraction layers
 0.0.1: Initial version, allowed simple file loading
