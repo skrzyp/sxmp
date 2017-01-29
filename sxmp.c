@@ -32,8 +32,7 @@ int main(int argc, char **argv) {
   sprintf(playerdata.str_filetype,"type:\t%s", module_get_type());
 
   module_play();
-/*  while (module_is_played() > 0) { */
-  while(true) {
+  while (module_is_played() > 0) {
     playerdata.position = module_get_time();
     sprintf(playerdata.str_position,
             "time:\t%02d:%02d.%03d",

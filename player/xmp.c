@@ -30,7 +30,8 @@ int   module_get_time()
 
 int   module_is_played()
 {
-  return frame_info.total_time - frame_info.time;
+  xmp_get_frame_info(context, &frame_info);
+  return frame_info.total_time - (frame_info.time+1);
 }
 
 char* module_get_title(){ return module_info.mod->name; }

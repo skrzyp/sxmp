@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -W -Werror -Wall -Wpedantic -std=c99
 LDFLAGS = -lao -lncurses
-all: sxmp sxmp-asap
+all: sxmp
 
 sxmp: sxmp.o libao.o xmp.o ncurses.o
 	${CC} ${CLFAGS} ${LDFLAGS} -lxmp -o sxmp sxmp.o libao.o xmp.o ncurses.o
