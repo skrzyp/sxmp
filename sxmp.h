@@ -6,7 +6,6 @@
 #include <time.h>
 #include <stdint.h>
 
-#define SXMP_VERSION "0.0.3"
 #define BUF_SIZE 4096
 
 struct
@@ -21,8 +20,6 @@ struct
   uint32_t  position;
 } playerdata;
 
-static const char* sxmp_version = SXMP_VERSION;
-extern void version();
 extern int main(int, char**);
 
 #endif // sxmp_h_INCLUDED

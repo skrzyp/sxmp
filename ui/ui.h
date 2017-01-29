@@ -5,6 +5,7 @@
 extern void ui_init();
 extern void ui_update();
 extern void ui_deinit();
+extern void ui_draw();
 
 #endif // ncurses_h_INCLUDED
 

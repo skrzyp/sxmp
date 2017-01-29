@@ -7,11 +7,8 @@ int  buffer_size = BUF_SIZE;
 char buffer[BUF_SIZE];
 
 
-void version(void) { printf("sxmp version:\t%s\n", sxmp_version); }
-
 int main(int argc, char **argv)
 {
-  version();
 
   if (argc <= 1) {
     printf("usage, %s <filename>\n", argv[0]);
@@ -31,6 +28,7 @@ int main(int argc, char **argv)
   sprintf(playerdata.str_filetype,"type:\t%s", module_get_type());
 
   module_play();
+  ui_draw(0);
   while (module_is_played() > 0) {
     playerdata.position = module_get_time();
     sprintf(playerdata.str_position,

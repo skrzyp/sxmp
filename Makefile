@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -W -Werror -Wall -Wpedantic -std=c99
+CFLAGS = -W -Werror -Wall -Wpedantic -std=c99 -D_POSIX_C_SOURCE
 LDFLAGS = -lao -lncurses
 all: sxmp sxmp-asap
 
