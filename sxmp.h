@@ -14,6 +14,7 @@ struct
   char str_filetype[255];
   char str_title[255];
   char str_position[255];
+  char str_author[255];
 
   char filename[255];
 

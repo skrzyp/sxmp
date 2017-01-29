@@ -9,16 +9,17 @@ all: sxmp sxmp-asap
 sxmp: sxmp.o audio_libao.so player_xmp.so ui_ncurses.so
 	${CC} ${CLFAGS} ${LDFLAGS} -o sxmp sxmp.o -L. -l:audio_libao.so -l:player_xmp.so -l:ui_ncurses.so
 
-sxmp-asap: player_asap.o
-	${CC} ${CLFAGS} ${LDFLAGS} -o sxmp-asap sxmp.o -L. -l:audio_libao.so -l:ui_ncurses.so \
-	player_asap.o -Wl,--whole-archive -lasap -Wl,--no-whole-archive
+sxmp-asap: player_asap.so
+	${CC} ${CLFAGS} -o sxmp-asap sxmp.o \
+	-L. -l:audio_libao.so -l:ui_ncurses.so -l:player_asap.so \
+	-L../asap-3.2.0/ -l:asap.so
 
 sxmp.o:
 	${CC} ${CFLAGS} -c sxmp.c
 
-player_asap.o:
+player_asap.so:
 	${CC} ${CFLAGS} -c player/asap.c
-	mv asap.o player_asap.o
+	${CC} ${SHAREFLAGS} -o player_asap.so asap.o -L../asap-3.2.0/ -l:asap.so
 
 audio_libao.so:
 	${CC} ${CFLAGS} -c audio/libao.c

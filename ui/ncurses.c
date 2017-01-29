@@ -10,7 +10,7 @@ void bar(int height, char* content, int colorpair)
   move(height,0);
   attron(COLOR_PAIR(colorpair));
   for(int i=0; i<width; i++) { mvaddch(height,i,' '); }
-  mvprintw(height,1,content);
+  mvprintw(height,0,content);
   attroff(COLOR_PAIR(colorpair));
 }
 
@@ -20,9 +20,10 @@ void ui_draw()
   refresh();
   clear();
   getmaxyx(stdscr,height,width);
-  mvaddstr((height/2)-1,1, playerdata.str_title);
-  mvaddstr((height/2),1,   playerdata.str_filetype);
-  mvaddstr((height/2)+1,1, playerdata.str_position);
+  mvaddstr((height/2)-1,0, playerdata.str_title);
+  mvaddstr((height/2),0,   playerdata.str_author);
+  mvaddstr((height/2)+1,0, playerdata.str_filetype);
+  mvaddstr((height/2)+2,0, playerdata.str_position);
   bar(height-2, playerdata.filename, 1);
   refresh();
 }
@@ -49,7 +50,7 @@ void ui_init(){
 }
 
 void ui_update(){
-  mvaddstr((height/2)+1,1, playerdata.str_position);
+  mvaddstr((height/2)+2,0, playerdata.str_position);
   refresh();
 }
 

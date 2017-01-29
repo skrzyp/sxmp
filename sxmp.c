@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 
   sprintf(playerdata.str_title,"title:\t%s", module_get_title());
   sprintf(playerdata.str_filetype,"type:\t%s", module_get_type());
+  sprintf(playerdata.str_author,"author:\t%s", module_get_author());
 
   module_play();
   ui_draw(0);

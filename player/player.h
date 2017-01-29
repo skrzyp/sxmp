@@ -17,6 +17,7 @@ extern int    module_get_buffer_size(                );
 extern char*  module_get_title(                      );
 extern int    module_get_time(                       );
 extern char*  module_get_type(                       );
+extern char*  module_get_author(                     );
 extern void   module_deinit(                         );
 
 #endif

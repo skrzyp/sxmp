@@ -4,6 +4,7 @@
 xmp_context context;
 struct xmp_frame_info frame_info;
 struct xmp_module_info module_info;
+struct xmp_module *module;
 
 void  module_init() { context = xmp_create_context(); }
 
@@ -14,9 +15,16 @@ void  module_load(char* path)
   xmp_load_module(context, path);
   xmp_get_module_info(context, &module_info);
   xmp_set_player(context, XMP_PLAYER_DEFPAN, 25);
+  module = module_info.mod;
 }
 
 void  module_play(){ xmp_start_player(context, 44100, 0); }
+
+char* module_get_author()
+{
+  struct xmp_instrument *first = &module->xxi[0];
+  return first->name;
+}
 
 int   module_fill_buffer(void* buffer, int size)
 {

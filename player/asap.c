@@ -12,6 +12,7 @@ int position;
 int duration;
 char title[255];
 char type[255];
+char author[255];
 
 void  module_init() { asap = ASAP_New(); }
 
@@ -50,6 +51,12 @@ char* module_get_title()
 {
   strcpy(title,ASAPInfo_GetTitle(info));
   return title;
+}
+
+char* module_get_author()
+{
+  strcpy(author, ASAPInfo_GetAuthor(info));
+  return author;
 }
 
 char* module_get_type()
