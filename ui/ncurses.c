@@ -15,6 +15,7 @@ void ui_update(){
   static int height, width;
   getch();
   clear();
+  curs_set(0);
   getmaxyx(stdscr,height,width);
   mvaddstr((height/2)-1,1, playerdata.str_title);
   mvaddstr((height/2),1,   playerdata.str_filetype);

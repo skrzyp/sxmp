@@ -54,7 +54,11 @@ char* module_get_title()
 
 char* module_get_type()
 {
-  strcpy(type,ASAPInfo_GetOriginalModuleExt(info,module,module_len));
+  strcpy(type,
+         ASAPInfo_GetExtDescription(
+           ASAPInfo_GetOriginalModuleExt(info,module,module_len)
+         )
+  );
   return type;
 }
 
