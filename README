@@ -4,10 +4,11 @@
 |___|_,_|_|_|_|  _| (C) 2017 Jakub Skrzypnik
               |_|
 
-dependencies: libxmp, libao
+dependencies: libxmp, libao, libasap
 
 ChangeLog:
 
+0.0.5: Move ui/audio/player to shared libraries
 0.0.4: First non-default player: ASAP, forced major cleanup of player "API" ;)
 0.0.3: First UI: ncurses, still very limited
 0.0.2: Audio and module loading done separately, initial abstraction layers
