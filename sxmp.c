@@ -2,10 +2,9 @@
 #include "player/player.h"
 #include "audio/audio.h"
 #include "ui/ui.h"
-
+#include <dlfcn.h>
 int  buffer_size = BUF_SIZE;
 char buffer[BUF_SIZE];
-
 
 int main(int argc, char **argv)
 {

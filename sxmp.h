@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdint.h>
+#include <dlfcn.h>
 
 #define BUF_SIZE 4096
 
