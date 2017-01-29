@@ -1,6 +1,5 @@
 #include <ao/ao.h>
-#define BUF_SIZE 4096
-ao_device *device;
+#include "audio.h"
 
 void audio_init(void){
   ao_sample_format format;
@@ -17,7 +16,7 @@ void audio_init(void){
   device = ao_open_live(default_driver, &format, NULL );
 }
 
-void audio_playframe(void *buffer, int buffer_size) {
+void audio_play_buffer(void *buffer, int buffer_size) {
     ao_play(device, buffer, buffer_size);
 }
 

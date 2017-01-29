@@ -1,14 +1,13 @@
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-
 #include "sxmp.h"
-#include "player/xmp.h"
-#include "audio/libao.h"
-#include "ui/ncurses.h"
+#include "player/player.h"
+#include "audio/audio.h"
+#include "ui/ui.h"
+
+int  buffer_size = BUF_SIZE;
+char buffer[BUF_SIZE];
+
 
 void version(void){
-  printf("libxmp version:\t%s\n", xmp_version);
   printf("sxmp version:\t%s\n", sxmp_version);
 }
 
@@ -23,26 +22,30 @@ int main(int argc, char **argv) {
 
   ui_init();
 
-  strcpy(filename, argv[1]);
+  strcpy(playerdata.filename, argv[1]);
 
   audio_init();
-  init_module();
-  load_module(filename);
+  module_init();
+  module_load(playerdata.filename);
 
-  sprintf(playback,"title:\t%s", module_info.mod->name);
-  sprintf(filetype,"type:\t%s", module_info.mod->type);
+  sprintf(playerdata.str_title,"title:\t%s", module_get_title());
+  sprintf(playerdata.str_filetype,"type:\t%s", module_get_type());
 
-  play_module();
-  while (play_module_frame() == 0) {
-    playback_time = frame_info.time;
-    sprintf(duration,"time:\t%02d:%02d.%03d",playback_time/1000/60,(playback_time/1000)%60,playback_time%1000);
-    if (get_module_frame() > 0)
-      break;
-    audio_playframe(frame_info.buffer, frame_info.buffer_size);
+  module_play();
+/*  while (module_is_played() > 0) { */
+  while(true) {
+    playerdata.position = module_get_time();
+    sprintf(playerdata.str_position,
+            "time:\t%02d:%02d.%03d",
+            playerdata.position/1000/60,
+            (playerdata.position/1000)%60,
+            playerdata.position%1000);
+    module_fill_buffer(&buffer, buffer_size);
+    audio_play_buffer(&buffer, buffer_size);
     ui_update();
   }
 
-  deinit_module();
+  module_deinit();
   audio_deinit();
   ui_deinit();
   return 0;

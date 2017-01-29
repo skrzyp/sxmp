@@ -4,16 +4,24 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <stdint.h>
 
 #define SXMP_VERSION "0.0.3"
+#define BUF_SIZE 4096
 
-char filename[255];
-char filetype[255];
-char playback[255];
-char duration[255];
-static int  playback_time;
+struct
+{
+  char str_filetype[255];
+  char str_title[255];
+  char str_position[255];
+
+  char filename[255];
+
+  uint32_t  duration;
+  uint32_t  position;
+} playerdata;
+
 static const char* sxmp_version = SXMP_VERSION;
-
 extern void version();
 extern int main(int, char**);
 

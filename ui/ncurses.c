@@ -12,13 +12,13 @@ void ui_init(){
 }
 
 void ui_update(){
-  static int height, width, key;
+  static int height, width;
   getch();
   clear();
   getmaxyx(stdscr,height,width);
-  mvaddstr((height/2)-1,1,playback);
-  mvaddstr((height/2),1,filetype);
-  mvaddstr((height/2)+1,1,duration);
+  mvaddstr((height/2)-1,1, playerdata.str_title);
+  mvaddstr((height/2),1,   playerdata.str_filetype);
+  mvaddstr((height/2)+1,1, playerdata.str_position);
   attron(COLOR_PAIR(1));
   move(0,0);
   for(int i=0; i<width; i++)
@@ -26,9 +26,6 @@ void ui_update(){
   mvprintw(0,0,"simple extensible media player");
   mvprintw(0,width-sizeof(sxmp_version),sxmp_version);
   attroff(COLOR_PAIR(1));
-  if(key == KEY_ENTER){
-    sprintf(filetype,"key: %d",key);
-  }
   refresh();
 }
 
