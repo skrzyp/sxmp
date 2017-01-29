@@ -8,6 +8,7 @@ dependencies: libxmp, libao
 
 ChangeLog:
 
+0.0.4: First non-default player: ASAP, forced major cleanup of player "API" ;)
 0.0.3: First UI: ncurses, still very limited
 0.0.2: Audio and module loading done separately, initial abstraction layers
 0.0.1: Initial version, allowed simple file loading

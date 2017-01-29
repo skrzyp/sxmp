@@ -1,13 +1,14 @@
 CC = gcc
 CFLAGS = -W -Werror -Wall -Wpedantic -std=c99
 LDFLAGS = -lao -lncurses
-all: sxmp
+all: sxmp sxmp-asap
 
 sxmp: sxmp.o libao.o xmp.o ncurses.o
 	${CC} ${CLFAGS} ${LDFLAGS} -lxmp -o sxmp sxmp.o libao.o xmp.o ncurses.o
 
 sxmp-asap: sxmp.o libao.o asap.o ncurses.o
-	${CC} ${CFLAGS} ${LDFLAGS} /usr/lib64/libasap.a -o sxmp-asap sxmp.o libao.o asap.o ncurses.o
+	${CC} ${CFLAGS} ${LDFLAGS} -o sxmp-asap sxmp.o libao.o asap.o ncurses.o \
+	-Wl,-whole-archive -lasap -Wl,-no-whole-archive
 
 asap.o:
 	${CC} ${CFLAGS} -c player/asap.c
@@ -27,3 +28,4 @@ ncurses.o:
 clean:
 	@rm *.o
 	@rm sxmp
+	@rm sxmp-asap

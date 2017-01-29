@@ -7,11 +7,10 @@ int  buffer_size = BUF_SIZE;
 char buffer[BUF_SIZE];
 
 
-void version(void){
-  printf("sxmp version:\t%s\n", sxmp_version);
-}
+void version(void) { printf("sxmp version:\t%s\n", sxmp_version); }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   version();
 
   if (argc <= 1) {

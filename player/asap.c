@@ -3,8 +3,7 @@
 #include <string.h>
 
 ASAP *asap;
-const ASAPInfo *info_r;
-ASAPInfo *info;
+const ASAPInfo *info;
 FILE *module_file;
 unsigned char module[ASAPInfo_MAX_MODULE_LENGTH];
 int module_len;
@@ -22,7 +21,7 @@ void  module_load(char* path)
   module_len  = fread(module, 1, sizeof(module), module_file);
   fclose(module_file);
   ASAP_Load(asap, path, module, module_len);
-  info_r = ASAP_GetInfo(asap);
+  info = ASAP_GetInfo(asap);
   song = ASAPInfo_GetDefaultSong(info);
   duration = ASAPInfo_GetDuration(info,song);
 }
@@ -61,6 +60,4 @@ char* module_get_type()
 
 void  module_deinit()
 {
-  ASAP_Delete(asap);
-  ASAPInfo_Delete(info);
 }
