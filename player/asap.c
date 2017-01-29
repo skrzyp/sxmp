@@ -27,6 +27,11 @@ void  module_load(char* path)
   duration = ASAPInfo_GetDuration(info,song);
 }
 
+int module_get_duration()
+{
+  return duration;
+}
+
 void  module_play(){ ASAP_PlaySong(asap, song, -1); }
 
 int   module_fill_buffer(void* buffer, int length)
@@ -35,7 +40,7 @@ int   module_fill_buffer(void* buffer, int length)
   return ASAP_Generate((ASAP *) asap, buffer, length, ASAPSampleFormat_S16_L_E);
 }
 
-int   module_get_time() { return position; }
+int   module_get_position() { return position; }
 
 int   module_is_played()
 {

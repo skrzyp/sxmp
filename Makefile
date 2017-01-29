@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -W -Werror -Wall -Wpedantic -std=c99 -D_POSIX_C_SOURCE -fPIC
+CFLAGS = -W -Werror -Wall -Wpedantic -std=c99 -D_POSIX_C_SOURCE -fPIC -s -O3
 LDFLAGS = -lao -lncurses
 SHAREFLAGS = -shared
 all: sxmp sxmp-asap
@@ -17,9 +17,13 @@ sxmp-asap: player_asap.so
 sxmp.o:
 	${CC} ${CFLAGS} -c sxmp.c
 
-player_asap.so:
+asap.so:
+	${CC} ${CFLAGS} -c 3rdparty/asap/asap.c
+	${CC} ${SHAREFLAGS} -o asap.so asap.o
+
+player_asap.so: asap.so
 	${CC} ${CFLAGS} -c player/asap.c
-	${CC} ${SHAREFLAGS} -o player_asap.so asap.o -L../asap-3.2.0/ -l:asap.so
+	${CC} ${SHAREFLAGS} -o player_asap.so asap.o -L. -l:asap.so
 
 audio_libao.so:
 	${CC} ${CFLAGS} -c audio/libao.c

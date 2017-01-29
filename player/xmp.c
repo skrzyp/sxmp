@@ -31,7 +31,12 @@ int   module_fill_buffer(void* buffer, int size)
   return xmp_play_buffer(context, buffer, size, 1);
 }
 
-int   module_get_time()
+int   module_get_duration()
+{
+  return frame_info.total_time;
+}
+
+int   module_get_position()
 {
   return frame_info.time;
 }

@@ -2,7 +2,7 @@
 #include "player/player.h"
 #include "audio/audio.h"
 #include "ui/ui.h"
-#include <dlfcn.h>
+
 int  buffer_size = BUF_SIZE;
 char buffer[BUF_SIZE];
 
@@ -30,12 +30,16 @@ int main(int argc, char **argv)
   module_play();
   ui_draw(0);
   while (module_is_played() > 0) {
-    playerdata.position = module_get_time();
+    playerdata.position = module_get_position();
+    playerdata.duration = module_get_duration();
     sprintf(playerdata.str_position,
-            "time:\t%02d:%02d.%03d",
+            "time:\t%02d:%02d.%03d / %02d:%02d.%03d",
             playerdata.position/1000/60,
             (playerdata.position/1000)%60,
-            playerdata.position%1000);
+            playerdata.position%1000,
+            playerdata.duration/1000/60,
+            (playerdata.duration/1000)%60,
+            playerdata.duration%1000);
     module_fill_buffer(&buffer, buffer_size);
     audio_play_buffer(&buffer, buffer_size);
     ui_update();

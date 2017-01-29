@@ -1,0 +1,9 @@
+[submodule "3rdparty/asap"]
+	path = 3rdparty/asap
+	url = https://git.code.sf.net/p/asap/code
+[submodule "3rdparty/libxmp"]
+	path = 3rdparty/libxmp
+	url = https://github.com/cmatsuoka/libxmp
+[submodule "3rdparty/netbsd-curses"]
+	path = 3rdparty/netbsd-curses
+	url = https://github.com/sabotage-linux/netbsd-curses
